@@ -1,0 +1,10 @@
+library(dplyr)
+library(ggplot2)
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+sub <- NEI %>% subset(type == "ON-ROAD" & (fips == "24510" | fips == "06037"))
+png("plot6.png")
+g <- ggplot(data = baltimore, aes(factor(year),y = Emissions)) + geom_bar(stat = "identity") + facet_grid(. ~ fips) + ylab("Total PM25 Emission (Tons)") + xlab("Year")
+g <- g + geom_bar(stat = "identity")
+g
+dev.off()
