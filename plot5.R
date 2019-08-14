@@ -1,0 +1,10 @@
+library(dplyr)
+library(ggplot2)
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+sub <- NEI %>% subset(type == "ON-ROAD" & fips == "24510")
+png("plot5.png")
+g <- ggplot(data = sub,aes(x = factor(year),y = Emissions))
+g <- g + geom_bar(stat = "identity")
+g
+dev.off()
