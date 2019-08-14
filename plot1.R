@@ -1,0 +1,8 @@
+library(dplyr)
+#setwd("Desktop/Developer/DataScience/exploratory-data-analysis/exploratory-data-analysis-course-project-2/data/")
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+TotalEmissions <- NEI %>% group_by(year) %>% summarize(Em = sum(Emissions))
+png("plot1.png")
+barplot(TotalEmissions$Em/1000,TotalEmissions$year,names.arg = TotalEmissions$year,xlab = "Year",ylab ="Total PM25 Emission (kilo Tons)",ylim = c(0,8000))
+dev.off()
